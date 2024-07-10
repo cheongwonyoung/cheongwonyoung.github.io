@@ -28,9 +28,6 @@ url: "https://cheongwonyoung.github.io"
 github:
   username: cheongwonyoung # change to your github username
 
-twitter:
-  username: cheongwonyoung # change to your twitter username
-
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
@@ -38,13 +35,13 @@ social:
   email: wjddnjsdud0601@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/cheongwonyoung # change to your twitter homepage
+    # - https://twitter.com/cheongwonyoung # change to your twitter homepage
     - https://github.com/cheongwonyoung # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
 
-google_site_verification: # fill in to your verification string
+google_site_verification: K6G6SLp01dkjPau9Q0wcpXCqqqWfQ0kvhfK0AHjOBH8 # fill in to your verification string
 
 # ↑ --------------------------
 # The end of `jekyll-seo-tag` settings
@@ -168,7 +165,6 @@ defaults:
       path: assets/js/dist
     values:
       swcache: true
-
 
 sass:
   style: compressed
