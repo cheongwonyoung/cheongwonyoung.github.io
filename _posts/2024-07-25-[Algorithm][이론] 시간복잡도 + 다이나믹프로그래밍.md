@@ -1,5 +1,5 @@
 ---
-title: "[Algorithm] 시간 복잡도"
+title: "[Algorithm] 시간 복잡도 + 다이나믹 프로그래밍"
 excerpt: ""
 
 categories:
@@ -17,7 +17,7 @@ date: 2024-07-25
 last_modified_at: 2024-07-25
 ---
 
-# 시간 복잡도
+# 시간 복잡도 + 다이나믹 프로그래밍
 
 알고리즘에서 시간복잡도는 `연산 횟수`를 의미
 
@@ -60,7 +60,7 @@ public class timeComplexityExample1 {
 
 ### N의 크기에 따른 O(n)의 시간 복잡도
 
-![alt text](/assets/img/timePro.png)
+![Untitled](../assets/img/timetable.png)
 
 - **O(1)**: 상수 시간. 입력 크기와 관계없이 일정한 실행 시간을 가진다
 - **O(log n)**: 로그 시간. 입력 크기의 로그에 비례하는 실행 시간을 가진다
@@ -72,11 +72,18 @@ public class timeComplexityExample1 {
 
 O(n^2). 즉 다항 시간부터는 기하급수적으로 시간 복잡도가 증가하는 모습을 볼 수 있음
 
+### 시간 복잡도를 줄일 수 있는 방법
+
+1. 수학적 개념을 적용한 복잡도 줄이기
+2. 알고리즘 선택에 따른 시간 복잡도
+3. 메모이제이션(Memoization) 또는 다이나믹 프로그래밍(Dynamic Programming): 계산된 값을 저장해 두고 다시 사용함으로써 중복 계산을 피함. 특히 동적 계획법(DP) 문제에서 유용합니다
+
 ## 알고리즘 선택의 기준으로 사용
 
 버블 정렬과 병합 정렬의 시간 복잡도가 각각 O(n^2), O(nlongn)임을 생각하고 문제 예시 진행
 
-![alt text](/assets/img/timePro.png)
+![Untitled](../assets/img/timePro.png)
+
 수 정렬하기 (https://www.acmicpc.net/problem/2750)
 
 `시간 제한이 1초`이므로 이 조건을 만족하려면 `1억 번 이하의 연산 횟수`로 문제를 해결해야 함
@@ -171,3 +178,157 @@ public class 시간복잡도_판별원리3 {
 하지만 시간 복잡도는 가장 많이 중첩된 반복문을 기준으로 도출하므로 이 코드에서는 이중 for문이 전체 코드의 시간 복잡도의 기준이 된다
 
 따라서 크기가 N인 반복문이 더 추가 되어도 이 코드의 시간 복잡도는 O(N^2)이다
+
+## 동적 계획법 (Dynamic Programming)
+
+동적 계획법은 복잡한 문제를 여러 개의 간단한 문제로 분리하여 부분의 문제들을 해결하여 최종적으로 복잡한 문제의 답을 구하는 방법을 뜻함
+
+### 동적 계획법의 핵심 이론과 구현 방식
+
+1. 큰 문제를 작은 문제로 나눌 수 있어야 한다
+2. 작은 문제들이 반복돼 나타나고 사용되며 이 작은 문제들의 결괏값은 항상 같아야 한다
+3. 모든 작은 문제들은 한 번만 계산해 DP 테이블에 저장하며 추후 재사용할 때는 이 DP 테이블을 이용한다
+4. 동적 계획법은 top-down 방식과 bottom-up방식으로 구현될 수 있다
+
+> 피보나치 수열 공식
+
+1. 동적 계획법으로 풀 수 있는지 확인하기
+   1. 6번째 피보나치 수열은 5번째 피보나치 수열과 4번째 피보나치 수열의 합이다. 즉, 6번째 피보나치 수열을 구하는 문제는 5번째 피보나치 수열과 4번째 피보나치 수열을 구하는 작은 문제로 나눌 수 있고, 수열의 값은 항상 같기 때문에 동적 계획법으로 풀 수 있다
+2. 점화식 세우기
+   1. 논리적으로 전체 문제를 나누고, 전체 문제와 부분 문제 간의 인과 관계를 파악해야 한다
+   2. 피보나치 수열의 점화식은 `D[N] = D[N-1] + D[N-2]` 이다
+3. 메모이제이션 원리
+   1. 메모이제이션은 부분 문제를 풀었을 때 이 문제를 DP테이블에 저장해 놓고 다음에 같은 문제가 나왔을 때 재계산하지 않기 위해 DP 테이블의 값을 이용하는 것을 말함
+   2. D[1]과 D[2]의 값을 구해 놓았다면, D[3]를 구함에 있어서 D[3]=D[2]+D[1] 수식에서 재활용 할 수 있다
+4. `top-down` , `bottom-up` 방식
+
+```java
+// Top-Down 방식 예시
+public class TopDown{
+	static int[] D;
+	public static void main(String[] args){
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		D = new int[n+1];
+		for(int i=0; i<=n; i++){
+			D[i]=-1;
+		}
+		D[0] = 0;
+		D[1] = 1;
+		fibo(n);
+		System.out.println(D[n]);
+	}
+
+	static int fibo(int n){
+		if(D[n] != -1)
+			return D[n];
+		return D[n] = fibo(n-2) + fibo(n-1);
+	}
+}
+```
+
+### 정수를 1로 만들기
+
+https://www.acmicpc.net/problem/1463
+
+![Untitled](../assets/img/timepro1.png)
+
+- X가 10일 때의 예시
+  - 방법 1
+    1. 2로 나눈다 (10/2 = 5)
+    2. 1을 뺀다 (5-1 = 4)
+    3. 2로 나눈다 (4/2 = 2)
+    4. 1을 뺀다 ( 2-1 = 1)
+  - 방법 2
+    1. 1을 뺀다 (10-1 = 9)
+    2. 3을 나눈다(9/3 = 3)
+    3. 3을 나눈다(3/3 = 1)
+
+문제에 나와있는 가능한 연산 방식을 순서대로 진행한다면 방법 1처럼 연산을 4번 진행하게 된다. 하지만 방법 2로 진행하면 3번만에 연산을 끝낼 수 있음으로 바텀-업 방식을 통해 구현해야 한다
+
+```java
+public class Main{
+	static int N;
+	static int D[];
+	public static void main(String[] args) throws Exception{
+		Scanner sc = new Scanner(System.in);
+		N = sc.scanInt();
+		D = new int[N+1];
+		D[1] = 0;
+		for(int i=2; i<=N; i++){
+			D[i] = D[i-1] + 1; // 1을 빼서 구하는 연산
+			if(i%2==0) D[i] = Math.min(D[i], D[i/2] + 1);  // 2를 나눠서 구하는 연산
+			if(i%3==0) D[i] = Math.min(D[i], D[i/3] + 1); // 3을 나눠서 구하는 연산
+		}
+		System.out.println(D[N]);
+	}
+}
+```
+
+### 연속된 정수의 합 구하기
+
+https://www.acmicpc.net/problem/13398
+
+![Untitled](../assets/img/timepro2.png)
+
+> 잘못된 점화식 정의
+
+D[N] : 0에서 N까지 길이에서 연속으로 수를 선택하여 구할 수 있는 최대 합
+
+위 점화식이 잘못된 이유는 큰 문제를 부분 문제로 나눴을 때 부분 문제는 큰 문제를 해결하기 위한 1개의 부분이 돼야 한다는 것을 위배했기 때문
+
+`D = {10, -4, 3, 1, 5, ...}` 일 때, D[0], D[1], D[2], D[3], D[4] 모두 10이 됨
+
+> 올바른 점화식 정의
+
+D[N] : 0에서 N까지 길이에서 N을 포함하며 연속으로 수를 선택하여 구할 수 있는 최대 합
+
+L[N] : 왼쪽에서부터 N을 포함한 최대 연속 합을 의미
+
+R[N] : 오른쪽에서부터 N을 포함한 최대 연속 합을 의미
+
+> 점화식 정의
+
+L[i] = Math.max(A[i], L[i-1] + A[i]);
+
+R[i] = Math.max(A[i], R[i+1] + A[i]);
+
+```java
+public class Main {
+    public static void main(String[] args) throws NumberFormatException, IOException {
+    	BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+    	int N = Integer.parseInt(in.readLine());
+    	StringTokenizer st = new StringTokenizer(in.readLine());
+    	int[] A = new int[N];
+    	for(int i=0; i<N; i++) {
+    		A[i] = Integer.parseInt(st.nextToken());
+    	}
+
+    	// 오른쪽 방향으로 index를 포함한 최대 연속 합 구하기
+    	int[] L = new int[N];
+    	L[0] = A[0];
+    	int result = L[0];
+    	for(int i=1; i<N; i++) {
+    		L[i] = Math.max(A[i], L[i-1]+A[i]);
+    		result = Math.max(result, L[i]); // 1개도 제거하지 않았을 때를 기본 최댓값으로 저장
+    	}
+
+
+
+    	// 왼쪽 방향으로 index를 포함한 최대 연속 합 구하기
+    	int[] R = new int[N];
+    	R[N-1] = A[N-1];
+    	for(int i=N-2; i>=0; i--) {
+    		R[i] = Math.max(A[i], R[i+1]+A[i]);
+    	}
+
+    	// L[i-1] + R[i+1] 2개의 구간 합 배열을 더하면 i번째 값을 제거한 효과를 얻음
+    	for(int i=1; i<N-1; i++) {
+    		int temp = L[i-1] + R[i+1];
+    		result = Math.max(result, temp);
+    	}
+    	System.out.println(result);
+    }
+
+}
+```
