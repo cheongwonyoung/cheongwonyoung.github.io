@@ -1,11 +1,11 @@
 ---
-title: "[클린코드] 13장 동시성"
+title: "[SQL튜닝] 1장 MySQL과 MariaDB개요"
 excerpt: ""
 
 categories:
   - Book
 tags:
-  - [클린코드]
+  - [SQL튜닝]
 # toc(Table of Contents.) : true시 포스트의 목차가 보임.
 toc: true
 # true로 해주면 목차가 스크롤을 따라 움직이게 됨.
