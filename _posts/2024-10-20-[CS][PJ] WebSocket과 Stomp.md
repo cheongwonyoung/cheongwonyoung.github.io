@@ -207,4 +207,4 @@ STOMP를 사용해 이미지 전송 시, 이미지가 Base64로 인코딩되면�
 
 Base64 인코딩 이미지 전송하기 전에, 이미지의 크기를 조정하고 압축하여 전송 데이터의 크기를 줄여 해결.
 
-<img src="./채팅방시연.gif" alt="example" width="180" height="400">
+<img src="/assets/img/chat-demo.gif" alt="example" width="180" height="400">
