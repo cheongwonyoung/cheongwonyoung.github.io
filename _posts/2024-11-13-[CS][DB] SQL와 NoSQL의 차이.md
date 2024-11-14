@@ -180,19 +180,7 @@ EX) 사용자 정보에 주소지가 필요하지 않던 서비스가 확장되�
   - 각 노드(A,B,C,..)는 분산된 클러스터 내의 독립적인 서버이며, 데이터는 각 노드에 분산되어 저장됨
   - 해시 함수를 사용하여 Row Key가 특정 범위에 매핑되도록 하여 데이터를 분산시킴
   - 특정 노드가 장애를 일으켜도 다른 노드가 데이터를 백업하고 있어서 고가용성을 보장함
-  
-| Row Key (User ID) | Column Name       | Column Value          |
-|--------------------|-------------------|------------------------|
-| user123           | 이름              | 홍길동                |
-|                   | 나이              | 30                    |
-|                   | 이메일            | hong@example.com      |
-|                   | 전화번호           | 010-1234-5678         |
-| user456           | 이름              | 김철수                |
-|                   | 나이              | 25                    |
-|                   | 이메일            | kim@example.com       |
-|                   | 주소              | 서울특별시 강남구      |
-| user789           | 이름              | 이영희                |
-|                   | 이메일            | lee@example.com       |
+  ![alt text](/assets/img/sql-image-17.png)
   - Row Key를 통해 각 사용자의 데이터를 빠르게 조회 가능
   - Column Name은 데이터 항목의 이름, Column Value는 실제 데이터 값이 저장
 
@@ -271,7 +259,7 @@ public class UserService {
 
 ### Document (문서 지향 데이터베이스) (MongoDB)
 MongoDB는 고성능, 고가용성 및 쉬운 확장성을 제공하는 NoSQL이며 Document 지향 데이터베이스이다  
-![alt text](image-13.png)
+![alt text](/assets/img/sql-image-13.png)
 데이터를 배열이나 중첩 Document와 같은 복잡한 데이터 유형을 효율적으로 저장할 수 있는 유연한 JSON과 유사한 형식인 BSON(Binary JSON)으로 저장한다  
 > Binary JSON : JSON은 사람이 읽기 편하지만, BSON은 이진 형식으로 사람이 읽기 어려운 반면 텍스트 형식보다 적은 용량을 사용하며, 처리 속도가 빠름  
 
